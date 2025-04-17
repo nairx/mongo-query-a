@@ -8,3 +8,11 @@ db.employees.updateOne(
   { $set: { org: "Wipro" } },
   { upsert: true }
 );
+
+db.employees.find(
+  { department: { $in: ["HR", "IT"] } }
+);
+
+db.employees.find(
+  { department: { $nin: ["HR", "IT"] } }
+);
