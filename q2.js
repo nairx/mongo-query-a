@@ -5,3 +5,7 @@ db.products.insertOne({
 });
 
 db.products.find();
+
+db.products.renameCollection("users")
+
+db.users.find();
