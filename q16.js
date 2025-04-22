@@ -73,23 +73,44 @@ db.employees.aggregate([
   },
 ]);
 
-
-
 db.employees.aggregate([
-    {
-      $project: {
-        _id: 0,
-        name: 1,
-        salary: 1,
-        grade: {
-          $switch: {
-            branches: [
-              { case: { $gte: ["$salary", 1500] }, then: "Grade A" },
-              { case: { $eq: ["$salary", 1500] }, then: "Grade B" },
-            ],
-            default: "Unknown",
-          },
+  { $match: { department: "HR" } },
+  {
+    $project: {
+      _id: 0,
+      name: 1,
+      salary: 1,
+      dept: {
+        $switch: {
+          branches: [
+            {
+              case: { $eq: ["$department", "IT"] },
+              then: "Information Technology",
+            },
+            { case: { $eq: ["$department", "HR"] }, then: "Human Resource" },
+          ],
+          default: "Unknown",
         },
       },
     },
-  ]);
+  },
+]);
+
+db.employees.aggregate([
+  {
+    $project: {
+      _id: 0,
+      name: 1,
+      salary: 1,
+      grade: {
+        $switch: {
+          branches: [
+            { case: { $gte: ["$salary", 1500] }, then: "Grade A" },
+            { case: { $eq: ["$salary", 1500] }, then: "Grade B" },
+          ],
+          default: "Unknown",
+        },
+      },
+    },
+  },
+]);
