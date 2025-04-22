@@ -16,3 +16,38 @@ db.posts.aggregate([
     },
   },
 ]);
+
+//////////
+
+db.authors.aggregate([
+    {$lookup:{
+        from:"posts",
+        localField:"_id",
+        foreignField:"authorId",
+        as:"posts"
+    }},
+    {$unwind:"$posts"}
+
+])
+
+
+db.authors.aggregate([
+    {$lookup:{
+        from:"posts",
+        localField:"_id",
+        foreignField:"authorId",
+        as:"posts"
+    }},
+])
+
+db.posts.insertOne({
+    title:"title 75",
+    desc: "desc 75",
+    authorId:ObjectId('68075aff10180e78792f45df')
+})
+
+db.authors.insertOne({
+    name:"John",
+    email:"john@email.com"
+})
+
