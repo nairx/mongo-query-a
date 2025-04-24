@@ -26,5 +26,17 @@ rs.secondaryOk()
 show dbs
 db.emp.find()
 
+mongosh --port 27018
+db.customers.insert({name:"Mike"})
+
+now check on 27019 and 27020 for updated data 
+
+goto to 27018
+use admin
+rs.shutdownServer()
+
+automatically 27019 or 27020 will become primary
+login using mongosh
+
 
 
