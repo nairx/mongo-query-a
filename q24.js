@@ -14,3 +14,17 @@ config={_id:"rs1",members:[{_id:0,host:"127.0.0.1:27018"},{_id:1,host:"127.0.0.1
 rs.initiate(config)
 rs.config()
 rs.status()
+
+Show dbs
+use mytestdb
+db.createCollection("customers")show
+db.customers.insertOne({name:"John"})
+exit
+
+mongosh --port 27019
+rs.secondaryOk()
+show dbs
+db.emp.find()
+
+
+
