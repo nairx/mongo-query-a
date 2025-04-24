@@ -23,3 +23,10 @@ db.createUser({
     pwd:"1234",
     roles:[{role:"read",db:"mydb"}]
 })
+
+
+db.createUser({
+    user:"user2",
+    pwd:"1234",
+    roles:[{role:"readWrite",db:"mydb"}]
+})
